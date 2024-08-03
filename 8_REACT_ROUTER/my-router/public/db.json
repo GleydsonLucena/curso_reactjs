@@ -1,44 +1,9 @@
 {
   "products": [
     {
-      "id": 19865,
-      "name": "Gleydson ",
-      "price": 123
-    },
-    {
-      "id": 45931,
-      "name": "Gleydson ",
-      "price": 123
-    },
-    {
-      "id": 10142,
-      "name": "Gleydson ",
-      "price": 123
-    },
-    {
-      "id": 94176,
-      "name": "Gleydson ",
-      "price": 123
-    },
-    {
-      "id": 69060,
-      "name": "Gleydson ",
-      "price": 123
-    },
-    {
-      "id": 99446,
-      "name": "Gleydson ",
-      "price": 123
-    },
-    {
-      "id": 34869,
-      "name": "Gleydson ",
-      "price": 123
-    },
-    {
-      "id": 90386,
-      "name": "Gleydson ",
-      "price": 123
+      "id": 58938,
+      "name": "teste",
+      "price": 12.5
     }
   ]
 }
