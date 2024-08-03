@@ -1,0 +1,43 @@
+@use './variables'
+
+.card-product
+  border: .1rem solid variables.$white
+  padding: 1rem
+  border-radius: variables.$border-radius-default
+  min-width: 20rem
+  text-align: center
+
+  h2
+      text-align: center
+      margin-bottom: variables.$mg-bt
+
+  p
+    cursor: pointer
+    background-color: #1f6b01
+    padding: variables.$padding-default
+    border-radius: variables.$border-radius-default
+
+    &:hover
+      opacity: 0.8
+
+  .btn-card
+    display: flex
+    justify-content: center
+    gap: 2.3rem
+    padding: variables.$padding-default
+    margin-top: variables.$mg-bt
+
+    button
+      font-size: 1.5rem
+      text-transform: capitalize
+      padding: variables.$padding-default
+      min-width: 10rem
+      background-color: #646cff
+      color: #fff
+      border: none
+      border-radius: variables.$border-radius-default
+      cursor: pointer
+      transition: background-color 0.25s
+
+      &:hover
+        background-color: #535bf2

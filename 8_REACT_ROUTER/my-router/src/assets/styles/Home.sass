@@ -1,0 +1,63 @@
+@use './variables'
+
+.homeAndAbout-container 
+  display: flex
+  justify-content: center
+  flex-direction: column
+  gap: 4rem
+  padding: 3rem
+
+  a
+    color: variables.$white
+    text-decoration: none
+    padding: variables.$padding-default
+    border-radius: variables.$border-radius-default
+
+  a:hover
+    color: variables.$color1
+    text-shadow: 0 0 .3rem variables.$color1
+
+.wrapper-container 
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  gap: 2rem
+  margin: 1 0 2rem 0
+  max-width: 1200px
+  margin: 0 auto
+  padding: 0 2rem
+
+.add-product 
+  text-align: center
+
+  button
+    font-size: 2rem
+    padding: 1rem
+    width: 100%
+    background-color: #646cff
+    color: #fff
+    border: none
+    border-radius: 8px
+    cursor: pointer
+    transition: background-color 0.25s
+
+    &:hover
+      background-color: #535bf2
+
+    .btn-container
+      width: 100%
+
+.form
+  display: flex
+  flex-direction: column
+  margin: 2rem auto
+  width: 100%
+  gap: 2rem
+  border: 0.1rem solid #ccc
+  padding: 2rem
+  
+  input
+    padding: 1rem
+
+
+

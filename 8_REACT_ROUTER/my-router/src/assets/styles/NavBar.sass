@@ -1,0 +1,33 @@
+@use './variables'
+
+.nav-container 
+  display: flex
+  align-items: center
+  padding: 3rem
+  justify-content: space-between
+  box-shadow: 0 0 .2rem variables.$white
+  background: variables.$color2
+
+  h1
+    cursor: pointer
+    font-size: 5rem
+    color: variables.$white
+
+    &:hover 
+      color: variables.$color1
+      text-shadow: 0 0 .6rem variables.$color1
+
+  div
+    display: flex
+    align-items: center
+    gap: 2rem
+    font-size: 2rem
+    a
+      color: variables.$white
+      text-decoration: none
+      padding: variables.$padding-default
+      border-radius: variables.$border-radius-default
+
+    a:hover
+      color: variables.$color1
+      text-shadow: 0 0 .3rem variables.$color1
