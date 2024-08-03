@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const useFetch = (url) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [fetcher, setFetcher] = useState(false);
 
   const fetchData = async (url, config = null) => {
     const delay = Math.random() * 1000;
@@ -36,14 +37,17 @@ export const useFetch = (url) => {
   }, [url]);
 
   const httpRequest = async (data, method) => {
-    if (!products) return;
+    if (!products) {
+      setError('Sem produtos...');
+      return;
+    }
 
     const config = {
       method: method,
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(data)
     };
 
     setLoading(true);
@@ -62,7 +66,7 @@ export const useFetch = (url) => {
     }
   };
 
-  const deleteProducts = async (productId) => {
+  const deleteProducts = useCallback(async (productId) => {
     if (!products) return;
 
     const config = {
@@ -74,19 +78,18 @@ export const useFetch = (url) => {
 
     setLoading(true);
     setError(null);
-    console.log(`${url}${productId}`)
-    console.log(toString(productId))
-    try {
-      await fetchData(`${url}${productId}`, config);
 
-      setProducts(prevProducts => [...prevProducts.filter(p => p.id !== productId)]);
+    try {
+
+      await fetchData(`${url}${productId}`, config);
+      setProducts(products.filter(product => product.id !== productId));
     } catch (error) {
       setError(error.message);
-      console.error(error);
     } finally {
       setLoading(false);
     }
-  }
+    setFetcher(!fetcher);
+  }, [fetcher, url, products]);
 
   return { products, loading, error, httpRequest, deleteProducts };
 };
