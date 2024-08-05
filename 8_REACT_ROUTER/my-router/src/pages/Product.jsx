@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 
 import "../assets/styles/CardProduct.sass";
@@ -17,6 +17,7 @@ const Product = () => {
       <p>
         O preço de {name} é R$: {price}
       </p>
+      <Link to={`/products/${id}/info`}>Mais informações...</Link>
     </div>
   );
 };
