@@ -1,4 +1,7 @@
 import PropTypes from "prop-types";
+
+import { Link } from "react-router-dom";
+
 import "../assets/styles/CardProduct.sass";
 
 const ProductCard = (props) => {
@@ -10,6 +13,9 @@ const ProductCard = (props) => {
         <button onClick={() => props.handleDelete(props.id)}>Remover</button>
         <button>Editar</button>
       </div>
+      <Link to={`/products/${props.id}`}>
+        <button>Detalhes</button>
+      </Link>
     </div>
   );
 };
