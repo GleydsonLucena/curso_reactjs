@@ -4,6 +4,7 @@ import { useFetch } from "../hooks/useFetch";
 import ProductCard from "../components/ProductCard";
 
 import "../assets/styles/Home.sass";
+import SeachForm from "../components/SeachForm";
 
 const Home = () => {
   const [name, setName] = useState("");
@@ -40,6 +41,7 @@ const Home = () => {
 
   return (
     <div className="homeAndAbout-container">
+      <SeachForm />
       <div className="add-product">
         <div className="btn-container">
           <button onClick={() => setFormDisplay(!formDisplay)}>

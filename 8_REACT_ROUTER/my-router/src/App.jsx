@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar";
 import Product from "./pages/Product";
 import Info from "./pages/Info";
 import NotFound from "./pages/NotFound";
+import Search from "./pages/Search";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route exact path="/about" element={<About />} />
           <Route exact path="/products/:id" element={<Product />} />
           <Route exact path="/products/:id/info" element={<Info />} />
+          <Route path="/search" element={<Search />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

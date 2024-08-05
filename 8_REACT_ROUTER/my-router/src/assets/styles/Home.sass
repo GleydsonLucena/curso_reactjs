@@ -49,5 +49,34 @@
   input
     padding: 1rem
 
+.formSearch 
+  display: flex
+  align-items: center
+  justify-content: flex-end
+  margin-bottom: variables.$mg-bt
+
+  input
+    position: relative
+    padding: variables.$padding-default
+    border-radius: variables.$border-radius-default
+    width: 30%
+
+  .icon
+    position: absolute
+    cursor: pointer
+    display: flex
+    align-items: center
+    justify-content: center
+    font-size: 2rem
+    padding: .8rem 2rem
+    border-radius: variables.$border-radius-default
+    color: variables.$color2
+    border: none
+    transition: background-color 600ms ease-in-out
+
+    &:hover 
+      background-color: variables.$color1
+      color: variables.$white
+
 
 
