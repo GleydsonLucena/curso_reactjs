@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -19,6 +19,7 @@ function App() {
           <Route exact path="/products/:id" element={<Product />} />
           <Route exact path="/products/:id/info" element={<Info />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/company" element={<Navigate to="/about" />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
