@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { CounterContextProvider } from "./context/CounterContext";
 
 import "./styles/App.css";
 
@@ -11,12 +12,14 @@ function App() {
   return (
     <div className="app">
       <BrowserRouter>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/mais" element={<Mais />} />
-        </Routes>
+        <CounterContextProvider>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/mais" element={<Mais />} />
+          </Routes>
+        </CounterContextProvider>
       </BrowserRouter>
     </div>
   );
