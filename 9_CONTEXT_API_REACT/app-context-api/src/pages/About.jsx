@@ -1,9 +1,14 @@
-const Home = () => {
+import { useTittleColorContext } from "../hooks/useTittleColorContext";
+
+const About = () => {
+  const { color, dispatch, setColorTittle } = useTittleColorContext();
   return (
-    <div className="home">
-      <h1>Meu about</h1>
+    <div className="Home">
+      <h1 style={{ color: color }}>Meu about</h1>
+      <button onClick={() => setColorTittle("RED", dispatch)}>Vermelho</button>
+      <button onClick={() => setColorTittle("BLUE", dispatch)}>Azul</button>
     </div>
   );
 };
 
-export default Home;
+export default About;

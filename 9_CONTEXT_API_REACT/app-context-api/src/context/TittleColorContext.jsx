@@ -3,15 +3,25 @@ import PropTypes from "prop-types";
 
 export const TittleColorContext = createContext();
 
-export const tittleColorReducer = (tittle, action) => {
-  // switch
+export const tittleColorReducer = (state, action) => {
+  switch (action.type) {
+    case "RED":
+      return { ...state, color: "red" };
+    case "BLUE":
+      return { ...state, color: "blue" };
+    default:
+      return state;
+  }
+};
+
+export const setColorTittle = (color, dispatch) => {
+  dispatch({ type: color });
 };
 
 export const TittleColorContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(tittleColorReducer, { color: "purple" });
-  console.log("TittleColorContext", state);
   return (
-    <TittleColorContext.Provider value={{ ...state }}>
+    <TittleColorContext.Provider value={{ ...state, dispatch, setColorTittle }}>
       {children}
     </TittleColorContext.Provider>
   );
