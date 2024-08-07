@@ -1,9 +1,12 @@
+@use "./variables.scss";
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: variables.$font-default;
 }
 
 :root {
@@ -12,9 +15,4 @@
 
 body {
   font-size: 1.6rem;
-}
-
-.container {
-  min-height: 60vh;
-  margin: 0 auto;
 }
