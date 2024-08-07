@@ -7,6 +7,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: variables.$font-default;
+  list-style-type: none;
+  text-decoration: none;
+  color: variables.$colorSecondary;
 }
 
 :root {

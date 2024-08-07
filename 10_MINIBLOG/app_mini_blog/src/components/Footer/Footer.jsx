@@ -1,9 +1,10 @@
+import Container from "../../layout/Container/Container";
 import "./Footer.scss";
 
 const Footer = () => {
   return (
     <footer className="footer">
-      &copy; {new Date().getFullYear()} My Blog
+      <Container>&copy; {new Date().getFullYear()} My Blog</Container>
     </footer>
   );
 };
