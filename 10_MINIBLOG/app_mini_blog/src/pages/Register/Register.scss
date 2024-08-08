@@ -7,46 +7,21 @@
   border-radius: variables.$border-radius-default;
 
   h1 {
-    font-size: 3.5rem;
+    display: block;
+    font-size: 3rem;
     margin: variables.$mg-default;
+    line-height: 1.2;
+    text-transform: uppercase;
+
+    span {
+      display: block;
+    }
   }
 
   p {
-    margin: variables.$mg-default;
+    margin: 0 0 3rem 0;
     font-size: 1.5rem;
     color: variables.$color4;
     font-style: italic;
-  }
-
-  .form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-
-    label {
-      display: flex;
-      flex-direction: column;
-      margin: 0;
-      margin-bottom: variables.$padding-default;
-      font-size: 1.2rem;
-
-      span {
-        text-align: start;
-      }
-
-      input {
-        text-align: start;
-        border: 0.1rem solid variables.$color3;
-        padding: variables.$padding-default;
-        border-radius: variables.$border-radius-default;
-        margin-bottom: variables.$mg-default;
-
-        &:focus {
-          outline: none;
-          border-color: variables.$color5;
-          box-shadow: 0 0 0.3rem 0.1rem #00000042;
-        }
-      }
-    }
   }
 }

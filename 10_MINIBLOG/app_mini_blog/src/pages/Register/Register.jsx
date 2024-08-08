@@ -4,9 +4,12 @@ import "./Register.scss";
 const Register = () => {
   return (
     <section className="register">
-      <h1>Cadastre-se para postar</h1>
+      <h1>
+        Cadastre-se para <span>postar.</span>
+      </h1>
       <p>Crie seu usuário e compartilhe suas histórias.</p>
-      <Form />
+      {/* Passe um parametro via props  para o fomulário 'register' ou 'login' */}
+      <Form option="register" />
     </section>
   );
 };
