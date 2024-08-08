@@ -88,4 +88,12 @@ button {
       }
     }
   }
+
+  .error {
+    background-color: variables.$colorError;
+    color: white;
+    padding: variables.$padding-default;
+    margin-top: variables.$mg-default;
+    border-radius: variables.$border-radius-default;
+  }
 }

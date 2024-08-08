@@ -1,17 +1,42 @@
 import PropTypes from "prop-types";
 import { useContext, useState } from "react";
+import { UserContext } from "../../context/UserContext";
+import { useNewUser } from "../../hooks/useNewUser";
 
 import Input from "./Input";
-
 import "../../pages/Register/Register.scss";
-import { UserContext } from "../../context/UserContext";
+
 const Form = ({ option }) => {
-  const { ...value } = useContext(UserContext);
-  const [isRegister] = useState(option === "register" ? true : false);
-  const [isLogin] = useState(option === "login" ? true : false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const { user } = useNewUser();
+
+  const {
+    name,
+    setName,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    confirmPassword,
+    setConfirmPassword,
+  } = useContext(UserContext);
+
+  const isRegister = option === "register";
+  const isLogin = option === "login";
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setErrorMessage("");
+    if (!name || !email || !password) {
+      setErrorMessage("Preencha todos os campos!");
+      return;
+    }
+    if (isRegister && password !== confirmPassword) {
+      setErrorMessage("As senhas não coincidem!");
+      return;
+    }
+    console.log("Submited");
   };
 
   return (
@@ -22,8 +47,8 @@ const Form = ({ option }) => {
           name="name"
           label="Nome"
           placeholder="Digite seu nome"
-          onChange={(e) => value.setName(e.target.value)}
-          value={value.name}
+          onChange={(e) => setName(e.target.value)}
+          value={name}
         />
       )}
 
@@ -33,8 +58,8 @@ const Form = ({ option }) => {
           name="email"
           label="E-mail"
           placeholder="Digite seu E-mail"
-          onChange={(e) => value.setEmail(e.target.value)}
-          value={value.email}
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
         />
       )}
 
@@ -44,23 +69,24 @@ const Form = ({ option }) => {
           name="password"
           label="Senha"
           placeholder="Digite sua senha"
-          onChange={(e) => value.setPassword(e.target.value)}
-          value={value.password}
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
         />
       )}
 
       {isRegister && (
         <Input
           type="password"
-          name="ConfirmPassword"
+          name="confirmPassword"
           label="Confirmação de senha"
           placeholder="Confirme sua senha"
-          onChange={(e) => value.setConfirmPassword(e.target.value)}
-          value={value.ConfirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          value={confirmPassword}
         />
       )}
 
       <button type="submit">{isRegister ? "Cadastrar" : "Entrar"}</button>
+      {errorMessage && <div className="error">{errorMessage}</div>}
     </form>
   );
 };
