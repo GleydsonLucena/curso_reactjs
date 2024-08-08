@@ -10,6 +10,8 @@ const Input = (props) => {
         type={props.type}
         name={props.name}
         placeholder={`${props.placeholder}...`}
+        onChange={props.onChange}
+        value={props.value}
       />
     </label>
   );
@@ -21,6 +23,8 @@ Input.propTypes = {
   placeholder: PropTypes.string.isRequired,
   text: PropTypes.string,
   label: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  value: PropTypes.string,
 };
 
 export default Input;

@@ -1,21 +1,29 @@
 import PropTypes from "prop-types";
+import { useContext, useState } from "react";
+
 import Input from "./Input";
 
 import "../../pages/Register/Register.scss";
-import { useState } from "react";
-
+import { UserContext } from "../../context/UserContext";
 const Form = ({ option }) => {
+  const { ...value } = useContext(UserContext);
   const [isRegister] = useState(option === "register" ? true : false);
   const [isLogin] = useState(option === "login" ? true : false);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
   return (
-    <form className="form">
+    <form onSubmit={handleSubmit} className="form">
       {isRegister && (
         <Input
           type="text"
           name="name"
           label="Nome"
           placeholder="Digite seu nome"
+          onChange={(e) => value.setName(e.target.value)}
+          value={value.name}
         />
       )}
 
@@ -25,6 +33,8 @@ const Form = ({ option }) => {
           name="email"
           label="E-mail"
           placeholder="Digite seu E-mail"
+          onChange={(e) => value.setEmail(e.target.value)}
+          value={value.email}
         />
       )}
 
@@ -34,6 +44,8 @@ const Form = ({ option }) => {
           name="password"
           label="Senha"
           placeholder="Digite sua senha"
+          onChange={(e) => value.setPassword(e.target.value)}
+          value={value.password}
         />
       )}
 
@@ -43,6 +55,8 @@ const Form = ({ option }) => {
           name="ConfirmPassword"
           label="Confirmação de senha"
           placeholder="Confirme sua senha"
+          onChange={(e) => value.setConfirmPassword(e.target.value)}
+          value={value.ConfirmPassword}
         />
       )}
 

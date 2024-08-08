@@ -10,18 +10,22 @@ import Container from "./layout/Container/Container";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 
+import { UserContextProvider } from "./context/UserContext";
+
 function App() {
   return (
     <>
       <BrowserRouter>
         <Navbar />
         <Container customClass="min-height center">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
+          <UserContextProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/about" element={<About />} />
+            </Routes>
+          </UserContextProvider>
         </Container>
         <Footer />
       </BrowserRouter>
