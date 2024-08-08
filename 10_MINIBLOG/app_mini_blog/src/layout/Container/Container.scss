@@ -12,3 +12,15 @@
 .min-height {
   min-height: 80vh;
 }
+
+.column {
+  flex-direction: column;
+}
+
+.start {
+  justify-content: flex-start;
+}
+
+.center {
+  justify-content: center;
+}

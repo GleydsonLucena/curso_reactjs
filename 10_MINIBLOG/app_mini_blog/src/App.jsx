@@ -15,7 +15,7 @@ function App() {
     <>
       <BrowserRouter>
         <Navbar />
-        <Container>
+        <Container customClass="min-height center">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
