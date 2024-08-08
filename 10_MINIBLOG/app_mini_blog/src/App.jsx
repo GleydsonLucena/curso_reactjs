@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 
 import { UserContextProvider } from "./context/UserContext";
+import { UtilsContextProvider } from "./context/UtilsContext";
 
 function App() {
   return (
@@ -19,12 +20,14 @@ function App() {
         <Navbar />
         <Container customClass="min-height center">
           <UserContextProvider>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/about" element={<About />} />
-            </Routes>
+            <UtilsContextProvider>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/about" element={<About />} />
+              </Routes>
+            </UtilsContextProvider>
           </UserContextProvider>
         </Container>
         <Footer />

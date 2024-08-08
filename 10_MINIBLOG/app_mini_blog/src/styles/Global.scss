@@ -76,15 +76,14 @@ button {
     input {
       text-align: start;
       border: none;
-      border-bottom: 0.1rem solid variables.$color3;
+      border-bottom: 0.2rem solid variables.$color3;
       padding: variables.$padding-default;
       border-radius: variables.$border-radius-default;
       margin-bottom: variables.$mg-default;
 
       &:focus {
         outline: none;
-        border-color: variables.$color5;
-        box-shadow: 0 0 0.3rem 0.1rem #00000042;
+        border-color: variables.$colorSuccess;
       }
     }
   }

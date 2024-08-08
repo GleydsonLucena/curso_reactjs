@@ -1,15 +1,16 @@
 import PropTypes from "prop-types";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import { useNewUser } from "../../hooks/useNewUser";
+import { useUtils } from "../../hooks/useUtils";
 
 import Input from "./Input";
 import "../../pages/Register/Register.scss";
 
 const Form = ({ option }) => {
-  const [errorMessage, setErrorMessage] = useState("");
-
+  // eslint-disable-next-line no-unused-vars
   const { user } = useNewUser();
+  const { error, setError } = useUtils();
 
   const {
     name,
@@ -27,13 +28,13 @@ const Form = ({ option }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setErrorMessage("");
+    setError("");
     if (!name || !email || !password) {
-      setErrorMessage("Preencha todos os campos!");
+      setError("Preencha todos os campos!");
       return;
     }
     if (isRegister && password !== confirmPassword) {
-      setErrorMessage("As senhas não coincidem!");
+      setError("As senhas não coincidem!");
       return;
     }
     console.log("Submited");
@@ -86,7 +87,7 @@ const Form = ({ option }) => {
       )}
 
       <button type="submit">{isRegister ? "Cadastrar" : "Entrar"}</button>
-      {errorMessage && <div className="error">{errorMessage}</div>}
+      {error && <div className="error">{error}</div>}
     </form>
   );
 };
