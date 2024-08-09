@@ -35,6 +35,8 @@ export const useAutentication = () => {
       await updateProfile(user, {
         name: data.name,
       });
+      setLoading(false);
+      return user;
     } catch (error) {
       console.log(error.message);
       console.log(typeof error.message);

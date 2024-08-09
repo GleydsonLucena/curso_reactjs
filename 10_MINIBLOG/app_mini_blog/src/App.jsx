@@ -12,26 +12,29 @@ import Footer from "./components/Footer/Footer";
 
 import { UserContextProvider } from "./context/UserContext";
 import { UtilsContextProvider } from "./context/UtilsContext";
+import { AuthContextProvider } from "./context/AuthContext";
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Navbar />
-        <Container customClass="min-height center">
-          <UserContextProvider>
-            <UtilsContextProvider>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/about" element={<About />} />
-              </Routes>
-            </UtilsContextProvider>
-          </UserContextProvider>
-        </Container>
-        <Footer />
-      </BrowserRouter>
+      <AuthContextProvider>
+        <UserContextProvider>
+          <UtilsContextProvider>
+            <BrowserRouter>
+              <Navbar />
+              <Container customClass="min-height center">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/about" element={<About />} />
+                </Routes>
+              </Container>
+              <Footer />
+            </BrowserRouter>
+          </UtilsContextProvider>
+        </UserContextProvider>
+      </AuthContextProvider>
     </>
   );
 }
