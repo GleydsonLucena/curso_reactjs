@@ -1,16 +1,18 @@
 import PropTypes from "prop-types";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
 import { useNewUser } from "../../hooks/useNewUser";
 import { useUtils } from "../../hooks/useUtils";
 
 import Input from "./Input";
 import "../../pages/Register/Register.scss";
+import { useAutentication } from "../../hooks/useAutentication";
 
 const Form = ({ option }) => {
-  // eslint-disable-next-line no-unused-vars
   const { user } = useNewUser();
-  const { error, setError } = useUtils();
+  const { error, setError, loading } = useUtils();
+  // eslint-disable-next-line no-unused-vars
+  const { auth, createUser, authError } = useAutentication();
 
   const {
     name,
@@ -26,7 +28,13 @@ const Form = ({ option }) => {
   const isRegister = option === "register";
   const isLogin = option === "login";
 
-  const handleSubmit = (event) => {
+  useEffect(() => {
+    if (authError) {
+      setError(authError);
+    }
+  }, [authError, setError]);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
     if (!name || !email || !password) {
@@ -37,7 +45,10 @@ const Form = ({ option }) => {
       setError("As senhas não coincidem!");
       return;
     }
+
+    const res = await createUser(user);
     console.log("Submited");
+    console.log(res);
   };
 
   return (
@@ -86,7 +97,14 @@ const Form = ({ option }) => {
         />
       )}
 
-      <button type="submit">{isRegister ? "Cadastrar" : "Entrar"}</button>
+      {!loading && (
+        <button type="submit">{isRegister ? "Cadastrar" : "Entrar"}</button>
+      )}
+      {loading && (
+        <button disabled type="submit">
+          Aguarde...
+        </button>
+      )}
       {error && <div className="error">{error}</div>}
     </form>
   );
