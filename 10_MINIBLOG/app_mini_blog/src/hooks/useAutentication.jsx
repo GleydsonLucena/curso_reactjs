@@ -9,7 +9,7 @@ import {
 } from "firebase/auth";
 
 import { useEffect, useState } from "react";
-import { useUtils } from "./useUtils";
+import { useUtils } from "../context/UtilsContext";
 
 export const useAutentication = () => {
   const [cancelled, setCancelled] = useState(false);

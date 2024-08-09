@@ -1,10 +1,13 @@
 import { Link, NavLink } from "react-router-dom";
 
 import Container from "../../layout/Container/Container";
+import { useAutentication } from "../../hooks/useAutentication";
+import { useAuthContext } from "../../context/AuthContext";
 
 import "./Navbar.scss";
 
 const Navbar = () => {
+  const { user } = useAuthContext();
   return (
     <nav className="navbar">
       <Container>
@@ -17,12 +20,28 @@ const Navbar = () => {
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
-          <li>
-            <NavLink to="/Login">Login</NavLink>
-          </li>
-          <li>
-            <NavLink to="/register">Register</NavLink>
-          </li>
+          {!user && (
+            <>
+              <li>
+                <NavLink to="/Login">Login</NavLink>
+              </li>
+              <li>
+                <NavLink to="/register">Cadastrar</NavLink>
+              </li>
+            </>
+          )}
+
+          {user && (
+            <>
+              <li>
+                <NavLink to="/posts/create">Novo post</NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashbord">Dashbord</NavLink>
+              </li>
+            </>
+          )}
+
           <li>
             <NavLink to="/about">Sobre</NavLink>
           </li>

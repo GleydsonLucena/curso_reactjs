@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
 import { useNewUser } from "../../hooks/useNewUser";
-import { useUtils } from "../../hooks/useUtils";
+import { useUtils } from "../../context/UtilsContext";
 
 import Input from "./Input";
 import "../../pages/Register/Register.scss";

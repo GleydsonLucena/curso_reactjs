@@ -1,12 +1,11 @@
+import { createContext, useContext, useState } from "react";
 import PropTypes from "prop-types";
-import { useState } from "react";
-import { createContext } from "react";
 
 export const UtilsContext = createContext();
 
 export const UtilsContextProvider = ({ children }) => {
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   return (
     <UtilsContext.Provider
@@ -21,6 +20,12 @@ export const UtilsContextProvider = ({ children }) => {
     </UtilsContext.Provider>
   );
 };
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const useUtils = () => {
+  return useContext(UtilsContext);
+};
+
 UtilsContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
