@@ -4,9 +4,11 @@ import Container from "../../layout/Container/Container";
 import { useAuthContext } from "../../context/AuthContext";
 
 import "./Navbar.scss";
+import { useSignOut } from "../../hooks/useSignOut";
 
 const Navbar = () => {
   const { user } = useAuthContext();
+  const { logOut } = useSignOut();
   return (
     <nav className="navbar">
       <Container>
@@ -44,6 +46,12 @@ const Navbar = () => {
           <li>
             <NavLink to="/about">Sobre</NavLink>
           </li>
+
+          {user && (
+            <li>
+              <Link onClick={logOut}>Sair</Link>
+            </li>
+          )}
         </ul>
       </Container>
     </nav>

@@ -3,7 +3,7 @@ import "./Register.scss";
 
 const Register = () => {
   return (
-    <section className="register">
+    <section className="registerAndLogin">
       <h1>
         Cadastre-se para <span>postar.</span>
       </h1>

@@ -1,6 +1,6 @@
 @use "../../styles/variables.scss";
 
-.register {
+.registerAndLogin {
   text-align: center;
   border: 0.1rem solid variables.$color3;
   padding: 2rem;
@@ -23,5 +23,12 @@
     font-size: 1.5rem;
     color: variables.$color4;
     font-style: italic;
+  }
+
+  button {
+    &:hover {
+      background-color: variables.$colorSuccess;
+      color: variables.$colorPrimary;
+    }
   }
 }

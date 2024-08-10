@@ -4,9 +4,7 @@ import { db } from "../firebase/config";
 import {
   getAuth,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
   updateProfile,
-  signOut,
 } from "firebase/auth";
 
 import { useEffect, useState } from "react";
@@ -63,5 +61,6 @@ export const useAutentication = () => {
     auth,
     createUser,
     authError,
+    checkIfIsCancelled,
   };
 };

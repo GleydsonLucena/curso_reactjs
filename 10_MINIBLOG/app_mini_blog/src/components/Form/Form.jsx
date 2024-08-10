@@ -7,9 +7,11 @@ import { useUtils } from "../../context/UtilsContext";
 import Input from "./Input";
 import "../../pages/Register/Register.scss";
 import { useAutentication } from "../../hooks/useAutentication";
+import { useSingIn } from "../../hooks/useSingIn";
 
 const Form = ({ option }) => {
   const { user } = useNewUser();
+  const { LogIn } = useSingIn();
   const { error, setError, loading } = useUtils();
   // eslint-disable-next-line no-unused-vars
   const { auth, createUser, authError } = useAutentication();
@@ -34,25 +36,45 @@ const Form = ({ option }) => {
     }
   }, [authError, setError]);
 
-  const handleSubmit = async (event) => {
+  const handleSubmitRegister = async (event) => {
     event.preventDefault();
     setError("");
+
     if (!name || !email || !password) {
       setError("Preencha todos os campos!");
       return;
     }
-    if (isRegister && password !== confirmPassword) {
+    if (password !== confirmPassword) {
       setError("As senhas não coincidem!");
       return;
     }
+    await createUser(user);
 
-    const res = await createUser(user);
-    console.log("Submited");
-    console.log(res);
+    setName("");
+    setEmail("");
+    setPassword("");
+  };
+
+  const handleSubmitLogin = async (event) => {
+    event.preventDefault();
+    setError("");
+
+    if (!email || !password) {
+      setError("Preencha todos os campos!");
+      return;
+    }
+    await LogIn();
+
+    setName("");
+    setEmail("");
+    setPassword("");
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form">
+    <form
+      onSubmit={isLogin ? handleSubmitLogin : handleSubmitRegister}
+      className="form"
+    >
       {isRegister && (
         <Input
           type="text"
