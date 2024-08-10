@@ -1,7 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 
 import Container from "../../layout/Container/Container";
-import { useAutentication } from "../../hooks/useAutentication";
 import { useAuthContext } from "../../context/AuthContext";
 
 import "./Navbar.scss";

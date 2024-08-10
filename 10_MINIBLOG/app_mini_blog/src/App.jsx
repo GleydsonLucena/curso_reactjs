@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import Home from "./pages/Home/Home";
@@ -46,10 +46,22 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/posts/create" element={<CreatePost />} />
-                <Route path="/dashbord" element={<Dashbord />} />
+                <Route
+                  path="/login"
+                  element={!user ? <Login /> : <Navigate to="/" />}
+                />
+                <Route
+                  path="/register"
+                  element={!user ? <Register /> : <Navigate to="/" />}
+                />
+                <Route
+                  path="/posts/create"
+                  element={user ? <CreatePost /> : <Navigate to="/login" />}
+                />
+                <Route
+                  path="/dashbord"
+                  element={user ? <Dashbord /> : <Navigate to="/login" />}
+                />
               </Routes>
             </UserContextProvider>
           </Container>
