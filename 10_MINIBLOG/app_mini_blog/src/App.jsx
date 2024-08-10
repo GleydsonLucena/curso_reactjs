@@ -7,6 +7,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import CreatePost from "./pages/CreatePost/CreatePost";
 import Dashbord from "./pages/Dashbord/Dashbord";
+import NotFound from "./pages/NotFound/NotFound";
 
 import Container from "./layout/Container/Container";
 
@@ -62,6 +63,8 @@ function App() {
                   path="/dashbord"
                   element={user ? <Dashbord /> : <Navigate to="/login" />}
                 />
+
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </UserContextProvider>
           </Container>
