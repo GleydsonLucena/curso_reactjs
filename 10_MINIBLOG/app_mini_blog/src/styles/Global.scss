@@ -73,7 +73,8 @@ button {
       text-align: start;
     }
 
-    input {
+    input,
+    textarea {
       text-align: start;
       border: none;
       border-bottom: 0.2rem solid variables.$color3;
