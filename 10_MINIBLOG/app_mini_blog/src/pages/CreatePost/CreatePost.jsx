@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
+import { useInsertDocument } from "../../hooks/useInsertDocuments";
+import { useAuthContext } from "../../context/AuthContext";
 import { useUtils } from "../../context/UtilsContext";
 import Input from "../../components/Form/Input";
 
 import "./CreatePost.scss";
 
 const CreatePost = () => {
-  const { loading, error } = useUtils();
+  const navigate = useNavigate();
+
+  const { insertDocument, response } = useInsertDocument("posts");
+  const { user } = useAuthContext();
+  console.log(user);
+  const { error, setError } = useUtils();
 
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
@@ -15,7 +23,45 @@ const CreatePost = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setError(null);
+
+    // TODO: validar URL da imagem
+    try {
+      new URL(image);
+    } catch (error) {
+      setError("URL inválida para a imagem!");
+      console.log(error.message);
+      return;
+    }
+
+    // Validar tags
+    const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase());
+
+    // TODO:
+    if (!title || !image || !tags || !body) {
+      setError("Preencha todos os campos!");
+      return;
+    }
+
+    // Inserir o documento no Firestore
+    insertDocument({
+      title,
+      image,
+      tagsArray,
+      body,
+      authorId: user.uid,
+      authorIdentity: user.displayName,
+    });
+    navigate("/");
   };
+
+  useEffect(() => {
+    if (response.error) {
+      console.error("Erro na inserção do documento:", response.error);
+      setError(response.error);
+    }
+  }, [response, setError]);
+
   return (
     <div className="create-post">
       <h2>Criar um post</h2>
@@ -59,12 +105,8 @@ const CreatePost = () => {
           value={tags}
         />
 
-        {!loading && <button type="submit">Publicar</button>}
-        {loading && (
-          <button disabled type="submit">
-            Aguarde...
-          </button>
-        )}
+        {!response.loading && <button>Publicar</button>}
+        {response.loading && <button disabled>Aguarde...</button>}
         {error && <div className="error">{error}</div>}
       </form>
     </div>

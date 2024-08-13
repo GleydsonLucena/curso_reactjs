@@ -31,8 +31,9 @@ export const useAutentication = () => {
         data.password
       );
 
+
       await updateProfile(user, {
-        name: data.name,
+        displayName: data.name,
       });
       setLoading(false);
       return user;
