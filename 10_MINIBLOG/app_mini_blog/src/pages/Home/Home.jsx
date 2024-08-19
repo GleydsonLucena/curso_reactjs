@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Input from "../../components/Form/Input";
 import "./Home.scss";
 import { Link } from "react-router-dom";
@@ -6,8 +6,7 @@ import { useFetchDocuments } from "../../hooks/useFetchDocuments";
 
 const Home = () => {
   const [query, setQuery] = useState("");
-  const [posts, setPosts] = useState([]);
-  const { documents } = useFetchDocuments("posts");
+  const { documents: posts } = useFetchDocuments("posts");
 
   const refactorTags = (tags) => {
     return tags.map((tag) => {
@@ -17,10 +16,6 @@ const Home = () => {
       return tag;
     });
   };
-
-  useEffect(() => {
-    setPosts(documents);
-  }, [documents]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
