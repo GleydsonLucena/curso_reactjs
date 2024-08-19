@@ -1,0 +1,65 @@
+@use "../../styles/variables.scss";
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 77vh;
+  min-width: 100%;
+
+  h2 {
+    font-size: 5rem;
+    margin: 3rem;
+  }
+
+  .form {
+    flex-direction: row;
+
+    label {
+      margin: 0;
+
+      & span {
+        display: none;
+      }
+    }
+
+    button {
+      margin-left: 1rem;
+    }
+  }
+
+  .posts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+    width: 100%;
+    min-height: 50vh;
+
+    .no-posts {
+      display: flex;
+      flex-direction: column;
+
+      h3 {
+        font-weight: 200;
+        font-size: 3rem;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+
+  a {
+    text-align: center;
+    padding: variables.$padding-default 3rem;
+    border-radius: variables.$border-radius-default;
+    font-size: 1.6rem;
+    color: variables.$colorPrimary;
+    background-color: variables.$colorSuccess;
+    transition: background-color 500ms ease;
+
+    &:hover {
+      background-color: variables.$color4;
+    }
+  }
+}
