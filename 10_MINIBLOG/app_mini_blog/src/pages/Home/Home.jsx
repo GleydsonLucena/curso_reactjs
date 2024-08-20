@@ -3,19 +3,11 @@ import Input from "../../components/Form/Input";
 import "./Home.scss";
 import { Link } from "react-router-dom";
 import { useFetchDocuments } from "../../hooks/useFetchDocuments";
+import PostDetail from "../../components/PostDetail/PostDetail";
 
 const Home = () => {
   const [query, setQuery] = useState("");
-  const { documents: posts } = useFetchDocuments("posts");
-
-  const refactorTags = (tags) => {
-    return tags.map((tag) => {
-      if (tag[0] !== "#") {
-        return `#${tag}`;
-      }
-      return tag;
-    });
-  };
+  const { documents: posts } = useFetchDocuments("posts", query);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -44,15 +36,8 @@ const Home = () => {
         )}
         {posts && (
           <div className="posts-container">
-            {posts.map((post) => (
-              <div key={post.id}>
-                <h3>{post.title}</h3>
-                <img width="250px" src={post.image} alt={post.title} />
-                <p>{post.body}</p>
-                <p>Postado por: {post.authorIdentity}</p>
-                <p>Data: {post.createdAt.seconds}</p>
-                <p>Tags: {refactorTags(post.tagsArray).join(", ")}</p>
-              </div>
+            {posts.map((post, index) => (
+              <PostDetail key={index} {...post} />
             ))}
           </div>
         )}

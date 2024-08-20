@@ -1,0 +1,25 @@
+@use "../../styles/variables.scss";
+
+.post-detail {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+  min-height: 50vh;
+
+  h3 {
+    font-weight: 200;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  img {
+    width: 900px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: variables.$border-radius-default;
+  }
+
+  p {
+    margin-bottom: 1rem;
+  }
+}
