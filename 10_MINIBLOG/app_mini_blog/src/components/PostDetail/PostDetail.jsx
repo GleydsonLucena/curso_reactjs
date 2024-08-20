@@ -2,15 +2,6 @@ import PropTypes from "prop-types";
 import "./PostDetail.scss";
 
 const PostDetail = ({ ...post }) => {
-  const refactorTags = (tags) => {
-    return tags.map((tag) => {
-      if (tag[0] !== "#") {
-        return `#${tag}`;
-      }
-      return tag;
-    });
-  };
-
   return (
     <div className="post-detail">
       <h3>{post.title}</h3>
@@ -18,7 +9,7 @@ const PostDetail = ({ ...post }) => {
       <img src={post.image} alt={post.title} />
       <p>{post.body}</p>
       <p>Data: {post.createdAt.seconds}</p>
-      <p>Tags: {refactorTags(post.tagsArray).join(", ")}</p>
+      <p>Tags: {post.tagsArray.join(", ")}</p>
     </div>
   );
 };

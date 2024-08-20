@@ -1,55 +1,59 @@
-import { useEffect, useState } from 'react'
-import { db } from '../firebase/config'
-import { collection, query, where, orderBy, onSnapshot, QuerySnapshot } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
+import { db } from '../firebase/config';
+import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestore';
 import { useUtils } from '../context/UtilsContext';
 
-export const useFetchDocuments = (docCollection, search = null, uid = null) => {
+export const useFetchDocuments = (docCollection, search = null) => {
   const { setLoading, setError } = useUtils();
   const [documents, setDocuments] = useState([]);
-  const [cancelled, setCancelled] = useState(false);
+  const [isComponentUnmounted, setIsComponentUnmounted] = useState(false);
 
   const getDocuments = async () => {
-    if (cancelled) return;
+    if (isComponentUnmounted) return;
     setLoading(true);
 
     const collectionRef = collection(db, docCollection);
 
     try {
       let q;
-      q = query(collectionRef, orderBy('createdAt', 'desc'));
 
-      await onSnapshot(q, (QuerySnapshot) => {
+      if (search) {
+        q = query(collectionRef, where('tagsArray', 'array-contains', search), orderBy('createdAt', 'desc'));
+      } else {
+        q = query(collectionRef, orderBy('createdAt', 'desc'));
+      }
 
+      const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
         setDocuments(
           QuerySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
           }))
-        )
-      })
-      setLoading(false);
+        );
+        setLoading(false);
+      });
+
+      return () => unsubscribe();
 
     } catch (error) {
       console.log(error);
       setError(error.message);
       setLoading(false);
     }
-
   };
 
   useEffect(() => {
     getDocuments();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [docCollection, search, uid, cancelled]);
+  }, [docCollection, search, isComponentUnmounted]);
 
   useEffect(() => {
     return () => {
-      setCancelled(true);
+      setIsComponentUnmounted(true);
     };
   }, []);
 
   return {
     documents,
-  }
-
-}
+  };
+};

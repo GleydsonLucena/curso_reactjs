@@ -39,29 +39,4 @@
     width: 100%;
     min-height: 50vh;
   }
-
-  .no-posts {
-    display: flex;
-    flex-direction: column;
-
-    h3 {
-      font-weight: 200;
-      font-size: 3rem;
-      margin-bottom: 2rem;
-    }
-  }
-
-  a {
-    text-align: center;
-    padding: variables.$padding-default 3rem;
-    border-radius: variables.$border-radius-default;
-    font-size: 1.6rem;
-    color: variables.$colorPrimary;
-    background-color: variables.$colorSuccess;
-    transition: background-color 500ms ease;
-
-    &:hover {
-      background-color: variables.$color4;
-    }
-  }
 }
