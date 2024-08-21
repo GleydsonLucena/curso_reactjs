@@ -45,7 +45,7 @@ export const useFetchDocuments = (docCollection, search = null) => {
   useEffect(() => {
     getDocuments();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [docCollection, search, isComponentUnmounted]);
+  }, [docCollection, search, isComponentUnmounted, documents]);
 
   useEffect(() => {
     return () => {

@@ -21,6 +21,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import { useAutentication } from "./hooks/useAutentication";
 import { onAuthStateChanged } from "firebase/auth";
 import Search from "./pages/Search/Search";
+import Post from "./pages/Post/Post";
 
 function App() {
   const [user, setUser] = useState();
@@ -48,6 +49,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/search" element={<Search />} />
+                <Route path="/posts/:id" element={<Post />} />
                 <Route path="/about" element={<About />} />
                 <Route
                   path="/login"

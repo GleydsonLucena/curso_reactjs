@@ -1,15 +1,14 @@
 import PropTypes from "prop-types";
-import "./PostDetail.scss";
-import { Link } from "react-router-dom";
+import "../../pages/Post/Post.scss";
 
-const PostDetail = ({ ...post }) => {
+const ShowPost = ({ ...post }) => {
   return (
-    <div className="post-detail">
-      <h3>{post.title}</h3>
+    <div className="post">
+      <h2>{post.title}</h2>
       <p>Postado por: {post.authorIdentity}</p>
       <img src={post.image} alt={post.title} />
       <p>{post.body}</p>
-      <p>Data: {post.createdAt.seconds}</p>
+      <h3>Este post trata sobre:</h3>
       <p>
         Tags:{" "}
         {post.tagsArray.map((tag, index) =>
@@ -20,13 +19,12 @@ const PostDetail = ({ ...post }) => {
           )
         )}
       </p>
-      <Link to={`/posts/${post.id}`}>Ver</Link>
     </div>
   );
 };
 
-PostDetail.propTypes = {
+ShowPost.propTypes = {
   post: PropTypes.object,
 };
 
-export default PostDetail;
+export default ShowPost;
