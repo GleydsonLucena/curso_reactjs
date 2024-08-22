@@ -3,7 +3,7 @@ import { db } from '../firebase/config';
 import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestore';
 import { useUtils } from '../context/UtilsContext';
 
-export const useFetchDocuments = (docCollection, search = null) => {
+export const useFetchDocuments = (docCollection, search = null, uid = null) => {
   const { setLoading, setError } = useUtils();
   const [documents, setDocuments] = useState([]);
   const [isComponentUnmounted, setIsComponentUnmounted] = useState(false);
@@ -19,6 +19,8 @@ export const useFetchDocuments = (docCollection, search = null) => {
 
       if (search) {
         q = query(collectionRef, where('tagsArray', 'array-contains', search), orderBy('createdAt', 'desc'));
+      } else if (uid) {
+        q = query(collectionRef, where('authorId', '==', uid), orderBy('createdAt', 'desc'));
       } else {
         q = query(collectionRef, orderBy('createdAt', 'desc'));
       }

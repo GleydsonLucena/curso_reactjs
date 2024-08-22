@@ -4,7 +4,7 @@ import "./PostDetail.scss";
 const NoPost = () => {
   return (
     <div className="no-posts">
-      <h3>Nenhum post encontrado</h3>
+      <p>Nenhum post encontrado</p>
       <Link to="/">Voltar</Link>
     </div>
   );

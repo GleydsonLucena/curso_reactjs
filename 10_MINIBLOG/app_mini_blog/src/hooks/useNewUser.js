@@ -7,7 +7,6 @@ export const useNewUser = () => {
   if (!context) {
     console.log("Contexto não encontrado");
   }
-  console.log(context.name)
 
   return {
     user: {
