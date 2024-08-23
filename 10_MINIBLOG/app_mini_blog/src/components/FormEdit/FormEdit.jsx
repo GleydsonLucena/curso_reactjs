@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 import { useInsertDocument } from "../../hooks/useInsertDocuments";
-import { useAuthContext } from "../../context/AuthContext";
+import { useFetchDocument } from "../../hooks/useFetchDocument";
 import { useUtils } from "../../context/UtilsContext";
 import Input from "../../components/Form/Input";
 
-import "./CreatePost.scss";
-
-const CreatePost = () => {
-  const navigate = useNavigate();
-
+const FormEdit = () => {
+  const { id } = useParams();
   const { insertDocument, response } = useInsertDocument("posts");
-  const { user } = useAuthContext();
+  const { document: post } = useFetchDocument("posts", id);
+
   const { error, setError } = useUtils();
+
+  console.log(post);
 
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
@@ -40,25 +40,7 @@ const CreatePost = () => {
       setError("Preencha todos os campos!");
       return;
     }
-
-    // Inserir o documento no Firestore
-    insertDocument({
-      title,
-      image,
-      tagsArray,
-      body,
-      authorId: user.uid,
-      authorIdentity: user.displayName,
-    });
-    navigate("/");
   };
-
-  useEffect(() => {
-    if (response.error) {
-      console.error("Erro na inserção do documento:", response.error);
-      setError(response.error);
-    }
-  }, [response, setError]);
 
   return (
     <div className="create-post">
@@ -103,7 +85,7 @@ const CreatePost = () => {
           value={tags}
         />
 
-        {!response.loading && <button>Publicar</button>}
+        {!response.loading && <button>Editar</button>}
         {response.loading && <button disabled>Aguarde...</button>}
         {error && <div className="error">{error}</div>}
       </form>
@@ -111,4 +93,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default FormEdit;

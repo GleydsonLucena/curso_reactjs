@@ -22,6 +22,7 @@ import { useAutentication } from "./hooks/useAutentication";
 import { onAuthStateChanged } from "firebase/auth";
 import Search from "./pages/Search/Search";
 import Post from "./pages/Post/Post";
+import EditPost from "./pages/EditPost/EditPost";
 
 function App() {
   const [user, setUser] = useState();
@@ -50,6 +51,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/posts/:id" element={<Post />} />
+                <Route path="/posts/edit/:id" element={<EditPost />} />
                 <Route path="/about" element={<About />} />
                 <Route
                   path="/login"
