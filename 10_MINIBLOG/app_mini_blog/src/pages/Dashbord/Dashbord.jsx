@@ -12,6 +12,9 @@ const Dashbord = () => {
   let seconds;
   let nanoseconds;
 
+  const { documents: post } = useFetchDocuments("posts", null, uid);
+  // Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur cumque quam obcaecati hic consectetur nisi? Aspernatur eos distinctio quia corrupti reiciendis dolor error soluta, est provident voluptatibus, qui officia accusamus.
+
   post.map((post) => {
     if (post) {
       seconds = post.createdAt.seconds;
