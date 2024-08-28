@@ -51,7 +51,10 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/posts/:id" element={<Post />} />
-                <Route path="/posts/edit/:id" element={<EditPost />} />
+                <Route
+                  path="/posts/edit/:id"
+                  element={user ? <EditPost /> : <Navigate to="/login" />}
+                />
                 <Route path="/about" element={<About />} />
                 <Route
                   path="/login"

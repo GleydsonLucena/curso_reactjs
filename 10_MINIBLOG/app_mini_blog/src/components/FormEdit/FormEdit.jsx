@@ -1,24 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { useInsertDocument } from "../../hooks/useInsertDocuments";
-import { useFetchDocument } from "../../hooks/useFetchDocument";
 import { useUtils } from "../../context/UtilsContext";
+import { useAuthContext } from "../../context/AuthContext";
+import { useFetchDocument } from "../../hooks/useFetchDocument";
+import { useUpdateDocument } from "../../hooks/useUpdateDocument";
 import Input from "../../components/Form/Input";
+import "./Form.scss";
 
 const FormEdit = () => {
   const { id } = useParams();
-  const { insertDocument, response } = useInsertDocument("posts");
+  const { user } = useAuthContext();
   const { document: post } = useFetchDocument("posts", id);
+  const { updateDocument, response } = useUpdateDocument("posts");
 
   const { error, setError } = useUtils();
-
-  console.log(post);
 
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [tags, setTags] = useState("");
   const [body, setBody] = useState("");
+
+  useEffect(() => {
+    if (post) {
+      setTitle(post.title);
+      setImage(post.image);
+      setTags(post.tagsArray.join(", "));
+      setBody(post.body);
+    }
+  }, [post]);
+
+  const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase());
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -32,20 +44,29 @@ const FormEdit = () => {
       return;
     }
 
-    // Validar tags
-    const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase());
-
     // TODO:
     if (!title || !image || !tags || !body) {
       setError("Preencha todos os campos!");
       return;
     }
+
+    // Inserir o documento no Firestore
+    updateDocument({
+      title,
+      image,
+      tagsArray,
+      body,
+      authorId: user.uid,
+      authorIdentity: user.displayName,
+    });
+
+    console.log("coisado");
   };
 
   return (
     <div className="create-post">
-      <h2>Criar um post</h2>
-      <p>Escreva sobre o que quiser e compartilhe o seu conhecimento!</p>
+      <h2>Editar o post</h2>
+      <p>Edite o post que deseja e compartilhe o seu conhecimento!</p>
 
       <form onSubmit={handleSubmit} className="form">
         <Input
@@ -56,7 +77,6 @@ const FormEdit = () => {
           onChange={(e) => setTitle(e.target.value)}
           value={title}
         />
-
         <Input
           label="URL da imagem"
           type="text"
@@ -65,7 +85,10 @@ const FormEdit = () => {
           onChange={(e) => setImage(e.target.value)}
           value={image}
         />
-
+        <div className="previw-img">
+          <p>Previw da imagem:</p>
+          <img src={image} alt="imagem" />
+        </div>
         <label>
           <span>Conteúdo:</span>
           <textarea
@@ -75,7 +98,6 @@ const FormEdit = () => {
             value={body}
           />
         </label>
-
         <Input
           label="Tags"
           type="text"
@@ -84,7 +106,6 @@ const FormEdit = () => {
           onChange={(e) => setTags(e.target.value)}
           value={tags}
         />
-
         {!response.loading && <button>Editar</button>}
         {response.loading && <button disabled>Aguarde...</button>}
         {error && <div className="error">{error}</div>}

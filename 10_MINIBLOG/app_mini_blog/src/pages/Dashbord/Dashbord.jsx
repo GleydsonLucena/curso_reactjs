@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { useFetchDocuments } from "../../hooks/useFetchDocuments";
+import { useDeleteDocument } from "../../hooks/useDeleteDocument";
 import { Timestamp } from "firebase/firestore";
 import NoPost from "../../components/PostDetail/NoPost";
 
 import "./Dashbord.scss";
 const Dashbord = () => {
+  const { deleteDocument } = useDeleteDocument("posts");
   const { user } = useAuthContext();
   const uid = user.uid;
   const { documents: post } = useFetchDocuments("posts", null, uid);
@@ -61,7 +63,7 @@ const Dashbord = () => {
                 <td style={{ padding: 0 }}>
                   <button
                     className="delete"
-                    onClick={() => console.log("deletou")}
+                    onClick={() => deleteDocument(post.id)}
                   >
                     Deletar
                   </button>
