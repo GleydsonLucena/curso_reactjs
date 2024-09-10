@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useUtils } from "../../context/UtilsContext";
 import { useAuthContext } from "../../context/AuthContext";
@@ -9,6 +9,7 @@ import Input from "../../components/Form/Input";
 import "./Form.scss";
 
 const FormEdit = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const { user } = useAuthContext();
   const { document: post } = useFetchDocument("posts", id);
@@ -51,16 +52,17 @@ const FormEdit = () => {
     }
 
     // Inserir o documento no Firestore
-    updateDocument({
+    const data = {
       title,
       image,
       tagsArray,
       body,
       authorId: user.uid,
       authorIdentity: user.displayName,
-    });
+    };
+    updateDocument(id, data);
 
-    console.log("coisado");
+    navigate("/dashboard");
   };
 
   return (

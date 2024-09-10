@@ -6,7 +6,7 @@ import About from "./pages/About/About";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import CreatePost from "./pages/CreatePost/CreatePost";
-import Dashbord from "./pages/Dashbord/Dashbord";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import NotFound from "./pages/NotFound/NotFound";
 
 import Container from "./layout/Container/Container";
@@ -69,8 +69,8 @@ function App() {
                   element={user ? <CreatePost /> : <Navigate to="/login" />}
                 />
                 <Route
-                  path="/dashbord"
-                  element={user ? <Dashbord /> : <Navigate to="/login" />}
+                  path="/Dashboard"
+                  element={user ? <Dashboard /> : <Navigate to="/login" />}
                 />
 
                 <Route path="*" element={<NotFound />} />

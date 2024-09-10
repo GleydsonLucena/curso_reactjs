@@ -1,6 +1,6 @@
 import { useState, useEffect, useReducer } from "react";
 import { db } from '../firebase/config';
-import { collection, Timestamp, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 
 const initialState = {
   loading: null,
@@ -30,21 +30,15 @@ export const useUpdateDocument = (docCollection) => {
     }
   }
 
-  const updateDocument = async (document) => {
+  const updateDocument = async (id, data) => {
     checkCancelBeforeDispatch({
       type: 'LOADING',
     });
 
     try {
-      const newDocument = {
-        ...document,
-        createdAt: Timestamp.now()
-      }
+      const docRef = await doc(db, docCollection, id);
 
-      const updatedDocument = await updateDoc(
-        collection(db, docCollection),
-        newDocument
-      );
+      const updatedDocument = await (updateDoc(docRef, data));
 
       checkCancelBeforeDispatch({
         type: "UPDATED_DOC",

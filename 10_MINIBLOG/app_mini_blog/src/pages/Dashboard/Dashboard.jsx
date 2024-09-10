@@ -5,8 +5,8 @@ import { useDeleteDocument } from "../../hooks/useDeleteDocument";
 import { Timestamp } from "firebase/firestore";
 import NoPost from "../../components/PostDetail/NoPost";
 
-import "./Dashbord.scss";
-const Dashbord = () => {
+import "./Dashboard.scss";
+const Dashboard = () => {
   const { deleteDocument } = useDeleteDocument("posts");
   const { user } = useAuthContext();
   const uid = user.uid;
@@ -29,8 +29,8 @@ const Dashbord = () => {
   const day = date.getDate();
 
   return (
-    <div className="dashbord">
-      <h2>Dashbord</h2>
+    <div className="Dashboard">
+      <h2>Dashboard</h2>
       {post && post.length === 0 ? (
         <NoPost />
       ) : (
@@ -77,6 +77,6 @@ const Dashbord = () => {
   );
 };
 
-Dashbord.propTypes = {};
+Dashboard.propTypes = {};
 
-export default Dashbord;
+export default Dashboard;
